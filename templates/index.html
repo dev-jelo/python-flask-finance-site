@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+    <table class="table table-striped">
+        <thead class="text-left">
+            <tr>
+                <th scope="col">Symbol</th>
+                <th scope="col">Name</th>
+                <th scope="col">Shares</th>
+                <th scope="col">Current Price</th>
+                <th scope="col" class="text-right">TOTAL</th>
+            </tr>
+        </thead>
+        <tbody class="text-left">
+            {% for row in rows %}
+                <tr>
+                    <td>{{ row["symbol"] }}</td>
+                    <td>{{ row["name"] }}</td>
+                    <td>{{ row["sum(shares)"] }}</td>
+                    <td>{{ usd(row["price"]) }}</td>
+                    <td class="text-right">{{ usd(row["sum(shares)"] * row["price"]) }}</td>
+                </tr>
+            {% endfor %}
+            <tr class="text-left">
+                <td>Cash</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="text-right">{{ usd(cash) }}</td>
+            </tr>
+        </tbody>
+        <tfoot class="text-right">
+            <tr>
+                <td class="text-left font-weight-bold">Total Value</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="font-weight-bold">{{ usd(total) }}</td>
+            </tr>
+        </tfoot>
+    </table>
+{% endblock %}
